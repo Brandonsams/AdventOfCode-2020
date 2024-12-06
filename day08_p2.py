@@ -2,12 +2,14 @@
 fname = "day08_input.txt"
 # fname = "day08_input_example.txt"
 
+
 def load_input(fname):
     lines = []
     with open(fname) as file:
         for line in file:
             lines.append(line.rstrip())
     return lines
+
 
 boot_code_input = load_input(fname=fname)
 
@@ -17,12 +19,12 @@ for b in range(len(boot_code_input)):
         continue
     boot_code = boot_code_input.copy()
     if boot_code_input[b].startswith("jmp"):
-        boot_code[b] = boot_code_input[b].replace("jmp","nop")
+        boot_code[b] = boot_code_input[b].replace("jmp", "nop")
     elif boot_code_input[b].startswith("nop"):
-        boot_code[b] = boot_code_input[b].replace("nop","jmp")
+        boot_code[b] = boot_code_input[b].replace("nop", "jmp")
     else:
         continue
-    
+
     visited_indices = []
     accumulator = 0
     index = 0
@@ -33,7 +35,7 @@ for b in range(len(boot_code_input)):
             break
         instruction = boot_code[index]
         operation, argument = instruction.split()
-        argument_int = int(argument.replace("+",""))
+        argument_int = int(argument.replace("+", ""))
         match operation:
             case "acc":
                 accumulator += argument_int
